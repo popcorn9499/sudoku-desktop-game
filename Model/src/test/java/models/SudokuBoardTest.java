@@ -258,4 +258,16 @@ public class SudokuBoardTest {
         assertFalse(sudokuBoard.equals(clonedBoard));
         assertNotEquals(sudokuBoard.hashCode(), clonedBoard.hashCode());
     }
+
+    @Test
+    void testFieldUpdatesRowColumnBoxConsistency() {
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+
+        board.setField(4, 7, 9);
+
+        assertEquals(9, board.getField(4, 7).getValue());
+        assertEquals(9, board.getRow(7).getFields()[4].getValue());
+        assertEquals(9, board.getColumn(4).getFields()[7].getValue());
+        // also check correct box
+    }
 }
