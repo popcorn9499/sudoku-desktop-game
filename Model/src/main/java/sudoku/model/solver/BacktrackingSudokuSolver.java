@@ -6,17 +6,23 @@ import sudoku.model.models.SudokuBoard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
+
+    private static final Logger logger = LoggerFactory.getLogger(BacktrackingSudokuSolver.class);
     final int sudokuBoardSize = SudokuBoard.BOARD_SIZE;
 
     @Override
     public void solve(SudokuBoard board) throws FillingBoardSudokuException {
+        logger.info("solver called");
         fillBoard(board);
     }
 
     @Override
     public void fillBoard(SudokuBoard board) throws FillingBoardSudokuException {
+        logger.info("fillBoard called");
         if (!fillBoardRecursive(0, 0, board)) {
             throw new FillingBoardSudokuException();
         }
